@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "prettier": "2.0.5"
+  },
+  "dependencies": {
+    "alertifyjs": "^1.13.1"
   }
 }
