@@ -22,7 +22,7 @@
       </div>
 
       <div class="time-select">
-        <button data-time="120">2 Minutes</button>
+        <button data-time="5">2 Minutes</button>
         <button data-time="300">5 Minutes</button>
         <button data-time="600">10 Minutes</button>
       </div>
@@ -32,6 +32,7 @@
           <source src="./sounds/rain.mp3" />
         </audio>
         <img src="./svg/play.svg" alt="play" class="play" />
+        <img src="./svg/pause.svg" alt="pause" class="pause" style="display: none"/>
         <svg
           class="countdown"
           width="453"
@@ -78,6 +79,6 @@
     </div>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
-    <script src="App.js"></script>
+    <script type="module" src="App.js"></script>
   </body>
 </html>
