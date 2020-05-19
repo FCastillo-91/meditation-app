@@ -17,7 +17,9 @@ const timeSelector = () => {
 
 const updateTimeDisplay = (dataTime) => {
   countDown.meditationTime = dataTime;
-  countDown.timeDuration.textContent = countDown.formatTime(countDown.meditationTime);
+  countDown.timeDuration.textContent = countDown.formatTime(
+    countDown.meditationTime
+  );
 };
 
 const pressPlay = () => {
@@ -39,11 +41,6 @@ const pressPause = () => {
   });
 };
 
-
-
-
 timeSelector();
 pressPlay();
 pressPause();
-
-
