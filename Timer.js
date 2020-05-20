@@ -7,6 +7,7 @@ export class Timer {
   timerInterval;
   meditationTime;
   timePassed;
+  timeSelect;
 
   constructor() {
     this.timeDuration = document.querySelector(".time-display");
@@ -14,53 +15,70 @@ export class Timer {
     this.circleCountdownLength = this.progressDisplay.getTotalLength();
     this.playBtn = document.querySelector(".play");
     this.pauseBtn = document.querySelector(".pause");
-
   }
 
-    start() {
-        this.playBtn.style.display = "none";
-        this.pauseBtn.style.display = "block";
-        this.timerInterval = setInterval(() => {
-            const timeLeft = this.meditationTime - this.timePassed;
-            if (timeLeft >= 0) {
-                this.timeDuration.innerHTML = this.formatTime(timeLeft);
-                this.setCircle(timeLeft / this.meditationTime);
-            } else {
-                // mediaStatus.pause(); Does Timer call new Media
-                this.stop();
-                this.meditationTime = null;
-            }
-            this.timePassed = this.timePassed += 1;
-        }, 1000);
-    };
+  start() {
+    this.playBtn.style.display = "none";
+    this.pauseBtn.style.display = "block";
+    this.timerInterval = setInterval(() => {
+      const timeLeft = this.meditationTime - this.timePassed;
+      if (timeLeft >= 0) {
+        this.timeDuration.innerHTML = this.formatTime(timeLeft);
+        this.setCircle(timeLeft / this.meditationTime);
+      } else {
+        // mediaStatus.pause(); Does Timer call new Media
+        this.stop();
+        this.meditationTime = null;
+      }
+      this.timePassed = this.timePassed += 1;
+    }, 1000);
+  }
 
-    stop() {
-        this.playBtn.style.display = "block";
-        this.pauseBtn.style.display = "none";
-        clearInterval(this.timerInterval);
-        this.timerInterval = null;
-    };
+  stop() {
+    this.playBtn.style.display = "block";
+    this.pauseBtn.style.display = "none";
+    clearInterval(this.timerInterval);
+    this.timerInterval = null;
+  }
 
-    setCircle(percentage) {
-        const timePassed = Math.floor(this.circleCountdownLength - percentage * this.circleCountdownLength);
-        if (timePassed === 0) {
-            this.resetCircle();
-        } else {
-            this.progressDisplay.style.strokeDashoffset = timePassed;
-        }
-    };
-
-    resetCircle() {
-        this.progressDisplay.style.strokeDasharray = this.circleCountdownLength;
-        this.progressDisplay.style.strokeDashoffset = 0;
+  setCircle(percentage) {
+    const timePassed = Math.floor(
+      this.circleCountdownLength - percentage * this.circleCountdownLength
+    );
+    if (timePassed === 0) {
+      this.resetCircle();
+    } else {
+      this.progressDisplay.style.strokeDashoffset = timePassed;
     }
+  }
 
-    formatTime(time) {
-        const minutes = Math.floor(time / 60);
-        let seconds = time % 60;
-        if (seconds < 10) {
-            seconds = `0${seconds}`;
-        }
-        return `${minutes}: ${seconds}`;
-    };
+  resetCircle() {
+    this.progressDisplay.style.strokeDasharray = this.circleCountdownLength;
+    this.progressDisplay.style.strokeDashoffset = 0;
+    this.timePassed = 0;
+  }
+
+  formatTime(time) {
+    const minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+    if (seconds < 10) {
+      seconds = `0${seconds}`;
+    }
+    return `${minutes}: ${seconds}`;
+  }
+
+  timeSelector() {
+    this.timeSelect = document.querySelectorAll(".time-select button");
+    this.timeSelect.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        this.timePassed = 0;
+        this.updateTimeDisplay(btn.getAttribute("data-time"));
+      });
+    });
+  }
+
+  updateTimeDisplay(dataTime) {
+    this.meditationTime = dataTime;
+    this.timeDuration.textContent = this.formatTime(this.meditationTime);
+  }
 }

@@ -1,4 +1,4 @@
-{
+ {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -34,18 +34,6 @@
 .player-container svg circle {
   transition: all 0.2s ease-in-out;
 }
-
-/*.time-select {*/
-/*  background: lightblue;*/
-/*}*/
-
-/*.sound-picker {*/
-/*  background: lightcoral;*/
-/*}*/
-
-/*.player-container {*/
-/*  background: lightgrey;*/
-/*}*/
 
 .time-display {
   position: absolute;
